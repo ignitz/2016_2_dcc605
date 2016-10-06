@@ -1,0 +1,74 @@
+/* MARK NAME Yuri Diego Santos Niitsuma */*************************************
+*******************************************************************************
+
+    /* MARK START task2
+     * TAREFA2: Implemente codigo abaixo para executar
+     * comandos simples. */
+    execvp(ecmd->argv[0], ecmd->argv); // Executa o comando
+    printf("Comando '%s' nao encontrado\n", ecmd->argv[0]);
+    /* MARK END task2 */
+*******************************************************************************
+
+
+*******************************************************************************
+
+    /* MARK START task3
+     * TAREFA3: Implemente codigo abaixo para executar
+     * comando com redirecionamento. */
+    close(rcmd->fd);
+    // Fico na duvida de deixar 0666 mesmo na leitura
+    if (open(rcmd->file, rcmd->mode, 0666) < 0) {
+      fprintf(stderr, "Erro ao abrir %s\n", rcmd->file);
+      exit(0);
+    }
+    /* MARK END task3 */
+*******************************************************************************
+
+
+*******************************************************************************
+
+    /* MARK START task4
+     * TAREFA4: Implemente codigo abaixo para executar
+     * comando com pipes. */
+    if(pipe(p))
+      fprintf(stderr, "pipe falhou!\n");
+
+    // Cria o filho da esquerda do pipe
+    if(fork1() == 0){
+      close(1); // stdout
+      dup(p[1]); // duplicate descriptors File status flag
+      close(p[0]); close(p[1]);
+      runcmd(pcmd->left);
+    }
+
+    // Cria o filho da direita do pipe
+    if(fork1() == 0){
+      close(0); // stdin
+      dup(p[0]);
+      close(p[0]); close(p[1]);
+      runcmd(pcmd->right);
+    }
+    close(p[0]);
+    close(p[1]);
+    wait(&r);
+    wait(&r);
+    /* MARK END task4 */
+*******************************************************************************
+
+
+*******************************************************************************
+
+    /* MARK START task1 */
+    /* TAREFA1: O que faz o if abaixo e por que ele é necessário?
+     * Insira sua resposta no código e modifique o fprintf abaixo
+     * para reportar o erro corretamente. */
+    if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
+      buf[strlen(buf)-1] = 0;
+      if(chdir(buf+3) < 0)
+        fprintf(stderr, "Erro ao mudar para o diretorio %s!\n", buf + 3);
+      continue;
+    }
+    /* MARK END task1 */
+*******************************************************************************
+
+
