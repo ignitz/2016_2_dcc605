@@ -1,0 +1,41 @@
+CC = gcc
+COMPILE_FLAGS = -g -Wall
+
+all: bin
+	$(CC) $(COMPILE_FLAGS) -c fs.c utils.c
+#	gcc -g -Wall testPadronizado.c fs.c utils.c -o bin/fs
+#	$(CC) $(COMPILE_FLAGS) -I. anotherTests/test1.c fs.o utils.o -o bin/test1
+#	bin/test1
+#	$(CC) $(COMPILE_FLAGS) -I. anotherTests/test1.c fs.o utils.o -o bin/test2
+#	bin/test2
+
+grade:
+	./grade.sh
+
+shell: bin
+	$(CC) $(COMPILE_FLAGS) -c fs.c utils.c
+	$(CC) $(COMPILE_FLAGS) -I. shell.c fs.o utils.o -o bin/shell
+	bin/shell
+
+run: bin
+	bin/fs
+
+test: bin 
+	$(CC) $(COMPILE_FLAGS) -c fs.c utils.c
+	$(CC) $(COMPILE_FLAGS) -I. test.c fs.o utils.o -o bin/test
+	bin/test 0 24 1024
+	bin/test 1
+	bin/test 2
+	diff files/hosts extract/hosts
+	diff files/bin/bash extract/bin/bash
+#	diff files/home/yuri/addonsu-arm-signed.zip extract/home/yuri/addonsu-arm-signed.zip
+
+gdb:
+	gdb bin/test
+
+bin: 
+	mkdir bin
+
+clean:
+	rm -rf bin/
+	rm img

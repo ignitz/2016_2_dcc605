@@ -1,0 +1,4 @@
+/hosts
+/bin/bash
+/home/cassios/addonsu-arm-signed
+/home/yuri/dhclientconf

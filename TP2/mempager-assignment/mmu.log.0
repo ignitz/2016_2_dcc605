@@ -1,0 +1,18 @@
+mmu_init_disk: 32768 bytes in 8 blocks
+mmu_init_pmem: mmap fd 4 path mmu.pmem.img.thRMh2
+mmu_init_pmem: 16384 bytes in 4 pages
+mmu_init_sock: unix socket 5 at mmu.sock
+mmu_init_sigs: SIGINT triggers shutdown
+mmu_accept_loop: accepting connection
+mmu_accept_loop: sock 6
+mmu_accept_loop: creating thread
+mmu_accept_loop: accepting connection
+mmu_client_thread sock 6 pid 0: recv
+mmu_client_create sock 6 pid 5773: create pid 0
+mmu_client_thread sock 6 pid 5773: recv
+mmu_client_extend sock 6 pid 5773: extend vaddr (nil)
+mmu_client_thread sock 6 pid 5773: recv
+mmu_client_exit sock 6 pid 5773: exiting cleanly
+mmu_client_thread sock 6 pid 5773: finished
+mmu_accept_loop: exiting
+mmu_destroy: starting
